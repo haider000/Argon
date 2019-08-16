@@ -33,4 +33,3 @@ class SignUpView(FormView):
                     return redirect('home')
         
         return render(request, self.template_name, {'form': form})
-
