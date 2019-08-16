@@ -6,15 +6,12 @@ from django.contrib.auth import authenticate, login
 from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from django.contrib import messages
-
 class SignUpView(FormView):
     form_class = SignUpForm
     template_name = 'signup.html'
-
     def get(self, request, *args, **kwargs):
         form = self.form_class(None)
         return render(request, self.template_name, {'form': form})
-
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -31,5 +28,4 @@ class SignUpView(FormView):
                  if user.is_active:
                     login(request, user)
                     return redirect('home')
-        
         return render(request, self.template_name, {'form': form})
