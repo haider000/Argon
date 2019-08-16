@@ -22,17 +22,15 @@ class SignUpView(FormView):
             # <process form cleaned data>
             username = form.cleaned_data['username']
             raw_password = form.cleaned_data['password1']
-            form.save()
-
-            user = authenticate(username=username, password=raw_password)
-            user.set_password(raw_password)
-            user.save()
-            messages.success(request,f'Account created for {username}')
+            form.save()#saves the form data
+            user = authenticate(username=username, password=raw_password)#authenticates the user info
+            user.set_password(raw_password)#will set the password
+            user.save()#save the user in the user table
+            messages.success(request,f'Account created for {username}')#this will show an alert if the account is created succesfully
             if user is not None:
-
-                if user.is_active:
+                 if user.is_active:
                     login(request, user)
                     return redirect('home')
-
+        
         return render(request, self.template_name, {'form': form})
 
