@@ -24,7 +24,7 @@ class SignUpView(FormView):
             raw_password = form.cleaned_data['password1']
             form.save()  # saves the form data
             # authenticates the user info
-             user = authenticate(username=username,
+            user = authenticate(username=username,
                                 password=raw_password)
             user.set_password(raw_password)
             user.save()  # save the user in the user table
